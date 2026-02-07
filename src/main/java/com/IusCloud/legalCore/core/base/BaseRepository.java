@@ -17,5 +17,5 @@ public interface BaseRepository<T, ID> extends JpaRepository<T, ID>, JpaSpecific
     @Override
     long count();
 
-    Page<T> findAllByActiveTrue(Pageable pageable);
+    Page<T> findAllByIsActiveTrue(Pageable pageable);
 }

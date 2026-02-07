@@ -32,7 +32,7 @@ public abstract class BaseModel {
     private Instant deletedAt;
 
     @Column(nullable = false)
-    private Boolean active = true;
+    private Boolean isActive = true;
 
     @PrePersist
     public void onCreate() {
