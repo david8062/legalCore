@@ -38,9 +38,9 @@ public class BranchEntity extends BaseModel {
     @Column(name = "email", nullable = false, length = 50)
     private String email;
     @Column(name = "phone1", nullable = false)
-    private Integer phone1;
+    private String phone1;
     @Column(name = "phone2")
-    private Integer phone2;
+    private String phone2;
     @Column(name = "description", length = 250)
     private String description;
     @Column(name = "legal_representative", length = 80)

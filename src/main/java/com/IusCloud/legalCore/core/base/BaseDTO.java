@@ -20,5 +20,5 @@ public abstract class BaseDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Instant updatedAt;
 
-    private Boolean active;
+    private Boolean isActive;
 }

@@ -29,6 +29,11 @@ public class BranchRepositoryImpl implements BranchRepository {
     }
 
     @Override
+    public Optional<BranchEntity> findById(UUID id) {
+        return jpaRepository.findById(id);
+    }
+
+    @Override
     public List<BranchEntity> findAll(UUID tenantId) {
         return jpaRepository.findAllByTenantId(tenantId);
     }
@@ -36,6 +41,11 @@ public class BranchRepositoryImpl implements BranchRepository {
     @Override
     public Page<BranchEntity> findAll(UUID tenantId, Pageable pageable) {
         return jpaRepository.findAllByTenantId(tenantId, pageable);
+    }
+
+    @Override
+    public Page<BranchEntity> findAllActive(UUID tenantId, Pageable pageable) {
+        return jpaRepository.findAllByTenantIdAndIsActiveTrue(tenantId, pageable);
     }
 
     @Override

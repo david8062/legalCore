@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Service
@@ -19,6 +20,11 @@ public class DeleteBranchUseCase {
     public void execute(UUID id, UUID tenantId) {
         BranchEntity entity = branchRepository.findById(id, tenantId)
                 .orElseThrow(() -> new ResourceNotFoundException("Branch not found"));
-        branchRepository.delete(entity);
+        
+        // Soft delete
+        entity.setIsActive(false);
+        entity.setDeletedAt(Instant.now());
+        
+        branchRepository.save(entity);
     }
 }

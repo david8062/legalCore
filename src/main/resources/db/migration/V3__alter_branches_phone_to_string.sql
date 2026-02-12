@@ -1,0 +1,7 @@
+ALTER TABLE branches
+    ALTER COLUMN phone1 TYPE VARCHAR(20)
+    USING phone1::VARCHAR;
+
+ALTER TABLE branches
+    ALTER COLUMN phone2 TYPE VARCHAR(20)
+    USING phone2::VARCHAR;

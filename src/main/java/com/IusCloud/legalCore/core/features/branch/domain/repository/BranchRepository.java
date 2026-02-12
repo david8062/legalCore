@@ -13,10 +13,14 @@ public interface BranchRepository {
     BranchEntity save(BranchEntity branch);
 
     Optional<BranchEntity> findById(UUID id, UUID tenantId);
+    
+    Optional<BranchEntity> findById(UUID id);
 
     List<BranchEntity> findAll(UUID tenantId);
 
     Page<BranchEntity> findAll(UUID tenantId, Pageable pageable);
+
+    Page<BranchEntity> findAllActive(UUID tenantId, Pageable pageable);
 
     boolean existsByName(String name, UUID tenantId);
 

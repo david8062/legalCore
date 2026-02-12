@@ -18,6 +18,8 @@ public interface BranchJpaRepository
 
     Page<BranchEntity> findAllByTenantId(UUID tenantId, Pageable pageable);
 
+    Page<BranchEntity> findAllByTenantIdAndIsActiveTrue(UUID tenantId, Pageable pageable);
+
     boolean existsByNameAndTenantId(String name, UUID tenantId);
 
     boolean existsByEmailAndTenantId(String email, UUID tenantId);

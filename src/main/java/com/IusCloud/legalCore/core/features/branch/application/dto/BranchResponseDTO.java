@@ -3,10 +3,12 @@ package com.IusCloud.legalCore.core.features.branch.application.dto;
 
 import com.IusCloud.legalCore.core.base.BaseDTO;
 import com.IusCloud.legalCore.shared.enums.BranchTypesEnum;
+import lombok.Getter;
+import lombok.Setter;
 
 
-
-
+@Getter
+@Setter
 public class BranchResponseDTO extends BaseDTO {
 
 

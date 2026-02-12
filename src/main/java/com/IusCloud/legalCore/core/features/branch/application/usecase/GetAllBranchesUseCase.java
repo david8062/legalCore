@@ -21,7 +21,7 @@ public class GetAllBranchesUseCase {
 
     @Transactional(readOnly = true)
     public Page<BranchResponseDTO> execute(UUID tenantId, Pageable pageable) {
-        Page<BranchEntity> branches = branchRepository.findAll(tenantId, pageable);
+        Page<BranchEntity> branches = branchRepository.findAllActive(tenantId, pageable);
         return branches.map(branchMapper::toResponse);
     }
 }

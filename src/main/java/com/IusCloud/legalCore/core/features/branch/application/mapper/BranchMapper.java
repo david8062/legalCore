@@ -11,6 +11,7 @@ import org.mapstruct.*;
         componentModel = "spring",
         config = BaseEntityMapperConfig.class
 )
+
 public interface BranchMapper {
 
     // ======================
