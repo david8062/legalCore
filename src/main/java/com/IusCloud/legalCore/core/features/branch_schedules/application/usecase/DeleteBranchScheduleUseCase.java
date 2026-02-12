@@ -17,9 +17,19 @@ public class DeleteBranchScheduleUseCase {
     private final BranchScheduleRepository repository;
 
     @Transactional
-    public void execute(UUID branchId, UUID scheduleId) {
+    public void execute(UUID branchId, UUID scheduleId, UUID tenantId) {
         BranchScheduleEntity entity = repository.findById(scheduleId)
                 .orElseThrow(() -> new ResourceNotFoundException("Branch Schedule not found"));
+
+        // Validar que el schedule pertenezca a la branch indicada
+        if (!entity.getBranch().getId().equals(branchId)) {
+            throw new ResourceNotFoundException("Schedule does not belong to the specified branch");
+        }
+
+        // Validar que la branch pertenezca al tenant
+        if (!entity.getBranch().getTenantId().equals(tenantId)) {
+            throw new ResourceNotFoundException("Branch Schedule not found");
+        }
 
         // Soft delete
         entity.setIsActive(false);

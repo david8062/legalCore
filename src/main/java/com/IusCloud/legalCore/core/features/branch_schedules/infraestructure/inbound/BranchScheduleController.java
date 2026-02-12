@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1/branches/{branchId}/schedules")
+@RequestMapping("/api/v1/branches/{branchId}/schedules")
 @RequiredArgsConstructor
 public class BranchScheduleController {
 
@@ -31,9 +31,10 @@ public class BranchScheduleController {
     @PostMapping
     public ResponseEntity<ApiResponse<BranchScheduleResponseDTO>> create(
             @PathVariable UUID branchId,
-            @RequestBody @Valid BranchScheduleRequestDTO request
+            @RequestBody @Valid BranchScheduleRequestDTO request,
+            @RequestHeader("X-Tenant-Id") UUID tenantId
     ) {
-        BranchScheduleResponseDTO response = createUseCase.execute(branchId, request);
+        BranchScheduleResponseDTO response = createUseCase.execute(branchId, request, tenantId);
         return ResponseUtil.created(response);
     }
 
@@ -42,9 +43,10 @@ public class BranchScheduleController {
     // ==========================
     @GetMapping
     public ResponseEntity<ListResponse<BranchScheduleResponseDTO>> getByBranch(
-            @PathVariable UUID branchId
+            @PathVariable UUID branchId,
+            @RequestHeader("X-Tenant-Id") UUID tenantId
     ) {
-        List<BranchScheduleResponseDTO> list = getByBranchUseCase.execute(branchId);
+        List<BranchScheduleResponseDTO> list = getByBranchUseCase.execute(branchId, tenantId);
         return ResponseUtil.list(list);
     }
 
@@ -55,10 +57,11 @@ public class BranchScheduleController {
     public ResponseEntity<ApiResponse<BranchScheduleResponseDTO>> update(
             @PathVariable UUID branchId,
             @PathVariable UUID scheduleId,
-            @RequestBody @Valid BranchScheduleRequestDTO request
+            @RequestBody @Valid BranchScheduleRequestDTO request,
+            @RequestHeader("X-Tenant-Id") UUID tenantId
     ) {
         BranchScheduleResponseDTO response =
-                updateUseCase.execute(branchId, scheduleId, request);
+                updateUseCase.execute(branchId, scheduleId, request, tenantId);
         return ResponseUtil.ok(response);
     }
 
@@ -68,9 +71,10 @@ public class BranchScheduleController {
     @DeleteMapping("/{scheduleId}")
     public ResponseEntity<Void> delete(
             @PathVariable UUID branchId,
-            @PathVariable UUID scheduleId
+            @PathVariable UUID scheduleId,
+            @RequestHeader("X-Tenant-Id") UUID tenantId
     ) {
-        deleteUseCase.execute(branchId, scheduleId);
+        deleteUseCase.execute(branchId, scheduleId, tenantId);
         return ResponseUtil.noContent();
     }
 }

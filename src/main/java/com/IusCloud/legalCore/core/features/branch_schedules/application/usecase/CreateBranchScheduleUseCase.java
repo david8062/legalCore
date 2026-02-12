@@ -23,9 +23,9 @@ public class CreateBranchScheduleUseCase {
     private final BranchScheduleMapper mapper;
 
     @Transactional
-    public BranchScheduleResponseDTO execute(UUID branchId, BranchScheduleRequestDTO request) {
-        // Buscar la entidad Branch para asignarla
-        BranchEntity branch = branchRepository.findById(branchId)
+    public BranchScheduleResponseDTO execute(UUID branchId, BranchScheduleRequestDTO request, UUID tenantId) {
+        // Buscar la entidad Branch para asignarla, validando que pertenezca al tenant
+        BranchEntity branch = branchRepository.findById(branchId, tenantId)
                 .orElseThrow(() -> new ResourceNotFoundException("Branch not found"));
 
         BranchScheduleEntity entity = mapper.toEntity(request);
